@@ -46,6 +46,10 @@ const router = createHashRouter([
       {
         path: '/dashboard',
         element: <Dashboard />
+      },
+      {
+        path: '/edit/:postId',
+        element: <Write />
       }
     ]
   },

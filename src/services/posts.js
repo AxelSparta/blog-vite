@@ -22,3 +22,9 @@ export const createPost = async formData => {
     withCredentials: true
   })
 }
+
+export const editPost = async (formData, postId) => {
+  return await axios.put(`${serverUrl}/api/posts/${postId}`, formData, {
+    withCredentials: true
+  })
+}

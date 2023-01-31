@@ -16,7 +16,7 @@
   }
 
   .error-message {
-    @apply text-sm text-red-700 mt-2 mb-4;
+    @apply text-sm text-red-700 mt-2;
   }
 
 }

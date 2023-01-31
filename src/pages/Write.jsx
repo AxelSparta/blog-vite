@@ -1,11 +1,12 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, useRef } from 'react'
 
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import Loader from '../components/Loader'
 import { AuthContext } from '../context/authContext'
-import { createPost } from '../services/posts'
+import { createPost, editPost, getPost } from '../services/posts'
 
 import { imageValidation } from '../validations/image.validation'
 import {
@@ -15,16 +16,39 @@ import {
 } from '../validations/post.validation'
 
 const Write = () => {
-  const state = useLocation().state
+  // form control
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+  const [file, setFile] = useState(null)
+  const [cat, setCat] = useState('')
+  const [loading, setLoading] = useState(false)
+
   const navigate = useNavigate()
 
   const { currentUser } = useContext(AuthContext)
+  const { postId } = useParams()
+  const inputFile = useRef()
 
-  const [title, setTitle] = useState(state?.desc || '')
-  const [content, setContent] = useState(state?.title || '')
-  const [file, setFile] = useState(null)
-  const [cat, setCat] = useState(state?.cat || '')
+  useEffect(() => {
+    // if user is not logged in redirect home
+    if (!currentUser) navigate('/')
+  }, [currentUser, navigate])
 
+  useEffect(() => {
+    // post to edit
+    if (postId) {
+      getPost(postId)
+        .then(({ data }) => {
+          setFile(data.image)
+          setContent(data.content)
+          setCat(data.category.toLowerCase())
+          setTitle(data.title)
+        })
+        .catch(err => console.error(err))
+    }
+  }, [])
+
+  // errors handlers
   const [errors, setErrors] = useState({
     title: { error: false, message: '' },
     content: { error: false, message: '' },
@@ -32,48 +56,13 @@ const Write = () => {
     category: { error: false, message: '' }
   })
 
-  useEffect(() => {
-    if (!currentUser) navigate('/')
-  }, [currentUser, navigate])
-
-  const validateTitle = () => {
-    const titleValidationResult = titleValidation(title)
-    if (titleValidationResult.error) {
-      setErrors(prev => ({
-        ...prev,
-        title: { error: true, message: titleValidationResult.message }
-      }))
-      return true
-    } else {
-      setErrors(prev => ({ ...prev, title: { error: false, message: '' } }))
-      return false
-    }
-  }
-
-  const validateCont = () => {
-    const contValidationResult = contentValidation(content)
-    if (contValidationResult.error) {
-      setErrors(prev => ({
-        ...prev,
-        content: { error: true, message: contValidationResult.message }
-      }))
-      return true
-    } else {
-      setErrors(prev => ({
-        ...prev,
-        content: { error: false, message: '' }
-      }))
-      return false
-    }
-  }
-
   const handleImg = e => {
     let img = e.target.files[0]
-    const resultImgValidation = imageValidation(img, 2)
-    if (resultImgValidation.error) {
+    const { error: imgError, message: imgErrorMsg } = imageValidation(img, 2)
+    if (imgError) {
       setErrors(prev => ({
         ...prev,
-        image: { error: true, message: resultImgValidation.message }
+        image: { error: imgError, message: imgErrorMsg }
       }))
       setFile(null)
     } else {
@@ -85,38 +74,43 @@ const Write = () => {
     }
   }
 
-  const validateCat = () => {
-    const catValidationResult = categoryValidation(cat)
-    if (catValidationResult.error) {
-      setErrors(prev => ({
-        ...prev,
-        category: { error: true, message: catValidationResult.message }
-      }))
-      return true
-    } else {
-      setErrors(prev => ({
-        ...prev,
-        category: { error: false, message: '' }
-      }))
-      return false
-    }
+  const clearImg = e => {
+    e.preventDefault()
+    setFile(null)
+    inputFile.current.value = ''
   }
 
-  const handleClick = async e => {
+  const handleSubmit = async e => {
     e.preventDefault()
-    const isTitleValid = validateTitle()
-    const isContValid = validateCont()
-    const isCatValid = validateCat()
-    if (!isTitleValid && !isContValid && !isCatValid) {
-      // UPLOAD POST
+    // VALIDATIONS
+    const { error: titleError, message: titleErrorMsg } = titleValidation(title)
+    const { error: contError, message: contErrorMsg } =
+      contentValidation(content)
+    const { error: catError, message: catErrorMsg } = categoryValidation(cat)
+
+    if (titleError || contError || catError) {
+      setErrors(prev => ({
+        ...prev,
+        title: { error: titleError, message: titleErrorMsg },
+        content: { error: contError, message: contErrorMsg },
+        category: { error: catError, message: catErrorMsg }
+      }))
+    } else {
+      // UPLOAD POST OR EDIT POST
+      setLoading(true)
       const formData = new FormData()
       formData.append('title', title)
       formData.append('content', content)
       formData.append('image', file)
       formData.append('category', cat)
       try {
-        let res = await createPost(formData)
-        console.log(res)
+        if (postId) {
+          await editPost(formData, postId)
+        } else {
+          await createPost(formData)
+        }
+        setLoading(false)
+        navigate('/')
       } catch (error) {
         console.error(error)
       }
@@ -125,9 +119,11 @@ const Write = () => {
 
   return (
     <div className='flex justify-center min-h-screen items-center pt-20'>
-      <form className='flex flex-col items-center rounded-lg shadow-lg border border-gray-300 w-4/5 max-w-4xl p-4'>
+      <form className='flex flex-col items-center rounded-lg shadow-lg border border-gray-300 w-4/5 max-w-4xl p-4 relative'>
+        {loading && <Loader format='rounded-lg z-10' />}
+
         <input
-          className='w-full py-2 px-4 border rounded font-bold text-xl text-gray-700 focus:outline-none focus:border-gray-700'
+          className='w-full py-2 px-4 border border-gray-400 rounded font-bold text-base text-gray-700 focus:outline-none focus:border-gray-700'
           placeholder='title'
           type='text'
           name='title'
@@ -137,11 +133,13 @@ const Write = () => {
         {errors.title.error && (
           <p className='error-message'>{errors.title.message}</p>
         )}
+
         <ReactQuill
-          className='overflow-scroll my-4 w-full'
+          className='w-full mt-4 h-44 mb-16'
           theme='snow'
           value={content}
           onChange={setContent}
+          placeholder='Content'
         />
         {errors.content && (
           <p className='error-message'>{errors.content.message}</p>
@@ -150,28 +148,39 @@ const Write = () => {
         <input
           type='file'
           id='file'
-          name=''
+          name='file'
           className='hidden'
           onChange={handleImg}
-          // (e) => setFile(e.target.files[0])
+          ref={inputFile}
         />
-        <label
-          className='border py-2 px-4 rounded-lg border-gray-800 text-gray-800 hover:text-white hover:bg-gray-800'
-          htmlFor='file'
-        >
-          Upload image
-        </label>
+        <div className='flex mt-4'>
+          <label
+            className='border py-2 px-4 rounded-lg border-gray-800 text-gray-800 hover:text-white hover:bg-gray-800 mx-2'
+            htmlFor='file'
+          >
+            Upload image
+          </label>
+          {file && (
+            <button
+              className='border py-2 px-4 rounded-lg border-gray-800 text-gray-800 hover:text-white hover:bg-gray-800 cursor-default mx-2'
+              onClick={clearImg}
+            >
+              Clear image
+            </button>
+          )}
+        </div>
         {file && (
           <img
             className='w-full h-80 object-cover my-2'
-            src={URL.createObjectURL(file)}
+            src={file.url || URL.createObjectURL(file)}
             alt='prev-img'
           />
         )}
         {errors.image.error && (
           <p className='error-message'>{errors.image.message}</p>
         )}
-        <div className='w-full flex justify-center flex-wrap gap-2 my-4 text-gray-800'>
+
+        <div className='w-full flex justify-center flex-wrap gap-2 mt-4 text-gray-800'>
           <div>
             <input
               type='radio'
@@ -244,8 +253,8 @@ const Write = () => {
         )}
 
         <button
-          onClick={handleClick}
-          className='py-2 px-4 border border-gray-800'
+          onClick={handleSubmit}
+          className='mt-4 py-2 px-8 border border-blue-700 text-blue-700 rounded hover:bg-blue-700 hover:text-white cursor-default'
         >
           Post
         </button>

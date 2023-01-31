@@ -13,5 +13,5 @@ export const imageValidation = (image, maxSizeInMb) => {
       message: `Image too large (max ${maxSizeInMb} mb).`
     }
 
-  return { error: false }
+  return { error: false, message: '' }
 }

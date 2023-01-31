@@ -16,6 +16,7 @@ const Login = () => {
     username: '',
     password: ''
   })
+
   const [err, setError] = useState(null)
   const [loading, setLoading] = useState(false)
 
@@ -33,7 +34,7 @@ const Login = () => {
     try {
       setLoading(true)
       await login(form)
-      navigate('/')
+      // navigate('/')
     } catch (err) {
       setError(err.response.data)
     } finally {

@@ -1,7 +1,5 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import Confirm from '../components/Confirm'
 import Loader from '../components/Loader'
 import PostCard from '../components/PostCard'
 import { getPosts } from '../services/posts'
@@ -32,7 +30,6 @@ const Home = () => {
       {posts.map(post => (
         <PostCard key={post._id} post={post} />
       ))}
-      <Confirm />
     </div>
   )
 }
