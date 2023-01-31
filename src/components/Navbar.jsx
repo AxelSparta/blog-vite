@@ -153,7 +153,7 @@ const Navbar = () => {
                     handleLogout(e)
                     handleClickMenu(e)
                   }}
-                  className='nav-link'
+                  className='nav-link w-full'
                 >
                   Logout
                 </button>
