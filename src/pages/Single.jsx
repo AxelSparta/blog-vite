@@ -34,16 +34,16 @@ const Single = () => {
       {loading && <Loader />}
       {post && (
         <>
-          <div className='h-52 md:h-72 '>
-            {post.image && (
+          {post.image && (
+            <div className='h-52 sm:h-72 md:h-72 '>
               <img
-                className='w-full h-full object-cover'
+                className='max-w-5xl mx-auto w-full h-full object-cover'
                 src={post.image.url}
                 alt='post-img'
               />
-            )}
-          </div>
-          <div className='md:w-10/12 mx-auto p-4'>
+            </div>
+          )}
+          <div className='max-w-5xl md:w-10/12 mx-auto p-4 md:p-0'>
             <div className='flex justify-between mt-2'>
               <p className='text-sm text-gray-700'>
                 Posted {moment(post.createdAt).fromNow()}
@@ -60,12 +60,13 @@ const Single = () => {
                 <p className='text-sm font-bold'>{author.username}</p>
               </div>
             </div>
-            <h1 className='text-3xl font-bold my-6'>{post.title}</h1>
+            <h1 className='text-4xl font-bold my-6'>{post.title}</h1>
             <div
+              className='post'
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(post.content)
               }}
-            ></div>
+            />
           </div>
         </>
       )}

@@ -8,7 +8,11 @@
   }
 
   .btn {
-    @apply py-2 px-4 border text-gray-800 border-gray-800 rounded block mx-auto my-4 hover:text-white hover:bg-gray-800 transition;
+    @apply py-2 px-4 border text-gray-800 border-gray-800 rounded block mx-auto my-4 hover:text-white hover:bg-gray-800 transition cursor-default;
+  }
+
+  .btn-red {
+    @apply hover:border-red-600 hover:bg-red-600 hover:text-white;
   }
 
   .input {
@@ -17,6 +21,35 @@
 
   .error-message {
     @apply text-sm text-red-700 mt-2;
+  }
+
+  .post h1 {
+    @apply text-4xl font-bold;
+  }
+
+  .post h2 {
+    @apply text-2xl font-bold;
+  }
+
+  .post h3 {
+    @apply text-xl font-bold;
+
+  }
+
+  .post p {
+    @apply text-lg;
+  }
+
+  .post ol {
+    @apply list-decimal;
+  }
+
+  .post ul {
+    @apply list-disc;
+  }
+
+  .post a {
+    @apply text-blue-600;
   }
 
 }

@@ -9,27 +9,35 @@ const Home = () => {
   const [loading, setLoading] = useState(false)
   const cat = useLocation().search
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true)
-        const res = await getPosts({ category: cat })
-        setPosts(res.data)
-      } catch (err) {
-        console.log(err)
-      } finally {
-        setLoading(false)
-      }
+  const handleGetPosts = async () => {
+    try {
+      setLoading(true)
+      const res = await getPosts({ category: cat })
+      setPosts(res.data)
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setLoading(false)
     }
-    fetchData()
+  }
+  useEffect(() => {
+    handleGetPosts()
   }, [cat])
 
   return (
     <div className='pt-[72px] px-4 min-h-screen relative'>
       {loading && <Loader />}
-      {posts.map(post => (
-        <PostCard key={post._id} post={post} />
-      ))}
+      {posts.length === 0 ? (
+        <p className='text-center font-bold text-lg m-6'>There aren't any post</p>
+      ) : (
+        posts.map(post => (
+          <PostCard
+            key={post._id}
+            post={post}
+            handleGetPosts={handleGetPosts}
+          />
+        ))
+      )}
     </div>
   )
 }
