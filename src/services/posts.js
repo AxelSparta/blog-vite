@@ -28,3 +28,9 @@ export const editPost = async (formData, postId) => {
     withCredentials: true
   })
 }
+
+export const deletePost = async postId => {
+  return await axios.delete(`${serverUrl}/api/posts/${postId}`, {
+    withCredentials: true
+  })
+}
