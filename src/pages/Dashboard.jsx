@@ -27,6 +27,7 @@ const Dashboard = () => {
   const { currentUser } = useContext(AuthContext)
   const [posts, setPosts] = useState([])
   const navigate = useNavigate()
+<<<<<<< HEAD
   const handleGetPosts = () => {
     setLoading(true)
     getPosts({ userId: currentUser._id })
@@ -36,12 +37,15 @@ const Dashboard = () => {
         setLoading(false)
       })
   }
+=======
+>>>>>>> a111dadfc4d39e2a019230e1591ce2aac6b3893c
 
   useEffect(() => {
     // if user is not logged in redirect home
     if (!currentUser) navigate('/')
   }, [currentUser, navigate])
 
+<<<<<<< HEAD
   useEffect(() => {
     handleGetPosts()
   }, [])
@@ -150,6 +154,20 @@ const Dashboard = () => {
           There aren't any post created
         </p>
       )}
+=======
+  return (
+    <section className='pt-[72px]'>
+      <h2>{currentUser.username}</h2>
+      <img
+        src='{currentUser.avatar.publicId}'
+        alt={`${currentUser.username} avatar`}
+      />
+      <form>
+        <input type='password' placeholder='Password' />
+        <input type='password' placeholder='New password' />
+        <input type='password' placeholder='Repeat new password' />
+      </form>
+>>>>>>> a111dadfc4d39e2a019230e1591ce2aac6b3893c
     </section>
   )
 }

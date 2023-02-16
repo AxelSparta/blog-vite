@@ -27,6 +27,7 @@ const Home = () => {
   return (
     <div className='pt-[72px] px-4 min-h-screen relative'>
       {loading && <Loader />}
+<<<<<<< HEAD
       {posts.length === 0
         ? (
           <p className='text-center font-bold text-lg m-6'>
@@ -42,6 +43,19 @@ const Home = () => {
               />
             ))
           )}
+=======
+      {posts.length === 0 ? (
+        <p className='text-center font-bold text-lg m-6'>There aren't any post</p>
+      ) : (
+        posts.map(post => (
+          <PostCard
+            key={post._id}
+            post={post}
+            handleGetPosts={handleGetPosts}
+          />
+        ))
+      )}
+>>>>>>> a111dadfc4d39e2a019230e1591ce2aac6b3893c
     </div>
   )
 }
