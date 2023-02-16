@@ -27,17 +27,21 @@ const Home = () => {
   return (
     <div className='pt-[72px] px-4 min-h-screen relative'>
       {loading && <Loader />}
-      {posts.length === 0 ? (
-        <p className='text-center font-bold text-lg m-6'>There aren't any post</p>
-      ) : (
-        posts.map(post => (
-          <PostCard
-            key={post._id}
-            post={post}
-            handleGetPosts={handleGetPosts}
-          />
-        ))
-      )}
+      {posts.length === 0
+        ? (
+          <p className='text-center font-bold text-lg m-6'>
+            There aren't any post
+          </p>
+          )
+        : (
+            posts.map(post => (
+              <PostCard
+                key={post._id}
+                post={post}
+                handleGetPosts={handleGetPosts}
+              />
+            ))
+          )}
     </div>
   )
 }

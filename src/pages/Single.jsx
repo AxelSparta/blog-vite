@@ -52,7 +52,7 @@ const Single = () => {
                 <img
                   src={
                     author.avatar.url ||
-                    'https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg'
+                    '/src/assets/user_noimage.jpg'
                   }
                   alt='avatar'
                   className='w-10 rounded-full mr-4'

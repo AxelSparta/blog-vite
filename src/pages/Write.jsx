@@ -57,7 +57,7 @@ const Write = () => {
   })
 
   const handleImg = e => {
-    let img = e.target.files[0]
+    const img = e.target.files[0]
     const { error: imgError, message: imgErrorMsg } = imageValidation(img, 2)
     if (imgError) {
       setErrors(prev => ({

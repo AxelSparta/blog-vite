@@ -7,7 +7,7 @@ export const getPosts = async ({ category, userId }) => {
     url = `${url}/cat${category}`
   }
   if (userId) {
-    url = `${url}/${userId}`
+    url = `${url}/user/${userId}`
   }
 
   return await axios.get(url)

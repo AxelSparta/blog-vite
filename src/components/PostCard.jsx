@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import _ from 'lodash'
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../context/authContext'
@@ -12,7 +12,6 @@ const PostCard = ({ post, handleGetPosts }) => {
   const [currentUserPostAuthor, setCurrentUserPostAuthor] = useState(false)
   const [dialog, setDialog] = useState(false)
   const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
   const { _id, title, createdAt, image, category, userId } = post
   const { currentUser } = useContext(AuthContext)
 
@@ -48,7 +47,7 @@ const PostCard = ({ post, handleGetPosts }) => {
         className='md:w-72 w-72 h-44 object-cover'
         src={
           image?.url ||
-          'https://media.istockphoto.com/id/1357365823/vector/default-image-icon-vector-missing-picture-page-for-website-design-or-mobile-app-no-photo.jpg?b=1&s=170667a&w=0&k=20&c=LEhQ7Gji4-gllQqp80hLpQsLHlHLw61DoiVf7XJsSx0='
+          '/src/assets/blog_noimage.jpg'
         }
         alt='post img'
       />
