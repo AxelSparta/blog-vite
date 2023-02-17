@@ -30,7 +30,7 @@ const Home = () => {
       {posts.length === 0
         ? (
           <p className='text-center font-bold text-lg m-6'>
-            There aren't any post
+            No post has been created
           </p>
           )
         : (

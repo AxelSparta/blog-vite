@@ -56,8 +56,8 @@ const Dashboard = () => {
             ))
           )
         : (
-          <p className='text-lg text-center font-bold'>
-            There aren't any post created
+          <p className='text-center font-bold'>
+            No post has been created
           </p>
           )}
     </section>
