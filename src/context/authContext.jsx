@@ -8,11 +8,10 @@ export const AuthContexProvider = ({ children }) => {
   const url = serverUrl
 
   const [currentUser, setCurrentUser] = useState(
-    JSON.parse(localStorage.getItem('user')) || null
+    JSON.parse(window.localStorage.getItem('user')) || null
   )
-
   useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(currentUser))
+    window.localStorage.setItem('user', JSON.stringify(currentUser))
   }, [currentUser])
 
   const getUser = async () => {
@@ -26,7 +25,6 @@ export const AuthContexProvider = ({ children }) => {
       withCredentials: true
     })
     const res = await getUser()
-    console.log(res.data)
     setCurrentUser(res.data)
   }
 
@@ -45,8 +43,18 @@ export const AuthContexProvider = ({ children }) => {
     setCurrentUser(null)
   }
 
+  const getCurrentUser = () => {
+    getUser()
+      .then(res => {
+        setCurrentUser(res.data)
+      })
+      .catch(err => console.error(err))
+  }
+
   return (
-    <AuthContext.Provider value={{ currentUser, login, logout, register }}>
+    <AuthContext.Provider
+      value={{ currentUser, login, logout, register, getUser, getCurrentUser }}
+    >
       {children}
     </AuthContext.Provider>
   )

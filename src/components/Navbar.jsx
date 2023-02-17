@@ -169,7 +169,7 @@ const Navbar = () => {
           ref={buttonMenu}
         >
           <span className='hamburger-box'>
-            <span className='hamburger-inner'></span>
+            <span className='hamburger-inner' />
           </span>
         </button>
       </div>

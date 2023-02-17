@@ -5,7 +5,7 @@ export default function Dialog ({ message, handleDelete }) {
 
   const handleNo = e => {
     if (e.target === dialogContainer.current) {
-      handleDelete(false)   
+      handleDelete(false)
     }
   }
   return (

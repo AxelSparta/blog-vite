@@ -55,7 +55,7 @@ const Single = () => {
                     '/src/assets/user_noimage.jpg'
                   }
                   alt='avatar'
-                  className='w-10 rounded-full mr-4'
+                  className='w-10 h-10 object-cover rounded-full mr-4'
                 />
                 <p className='text-sm font-bold'>{author.username}</p>
               </div>
