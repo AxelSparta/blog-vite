@@ -15,7 +15,7 @@ export const contentValidation = content => {
 }
 
 export const categoryValidation = category => {
-  const categories_allowed = [
+  const categoriesAllowed = [
     'technology',
     'art',
     'science',
@@ -23,7 +23,7 @@ export const categoryValidation = category => {
     'design',
     'food'
   ]
-  if (!category || !categories_allowed.includes(category.toLowerCase())) {
+  if (!category || !categoriesAllowed.includes(category.toLowerCase())) {
     return { error: true, message: 'Invalid category.' }
   }
   return { error: false, message: '' }
