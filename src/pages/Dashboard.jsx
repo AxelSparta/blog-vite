@@ -34,7 +34,7 @@ const Dashboard = () => {
   }, [])
 
   return (
-    <section className='pt-[80px] px-4'>
+    <section className='pt-[80px] px-4 min-h-screen'>
       {loading && <Loader format='z-10' />}
       {currentUser && (
         <div className='flex flex-col justify-around items-center max-w-5xl mx-auto md:flex-row'>

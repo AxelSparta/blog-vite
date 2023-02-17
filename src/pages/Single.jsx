@@ -30,8 +30,11 @@ const Single = () => {
   }, [id])
 
   return (
-    <section className='pt-[72px]'>
+    <section className='pt-[72px] min-h-screen'>
       {loading && <Loader />}
+      {!post && (
+        <p className='text-center font-bold p-4'>Post not found</p>
+      )}
       {post && (
         <>
           {post.image && (
