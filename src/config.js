@@ -1,1 +1,1 @@
-export const serverUrl = 'https://axelsparta-server.onrender.com/'
+export const serverUrl = 'https://axelsparta-server.onrender.com'
