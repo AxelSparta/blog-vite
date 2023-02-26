@@ -1,1 +1,1 @@
-export const serverUrl = import.meta.env.VITE_SERVER_URL
+export const serverUrl = 'https://dry-frog-5998.fly.dev'
