@@ -44,7 +44,7 @@ const PostCard = ({ post, handleGetPosts }) => {
       {loading && <Loader />}
       {dialog && <Dialog handleDelete={handleDelete} />}
       <img
-        className='md:w-72 w-72 h-44 object-cover'
+        className='md:w-72 w-72 h-44 object-cover object-left-top'
         src={
           image?.url ||
           '/src/assets/blog_noimage.jpg'

@@ -9,9 +9,9 @@ const Footer = () => {
           Built by{' '}
           <a
             className='underline hover:text-gray-200'
-            href='#'
+            href='https://axelsparta.netlify.app/'
             target='_blank'
-            rel='noopener'
+            rel='noopener noreferrer'
           >
             Axel Sparta
           </a>

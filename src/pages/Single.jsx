@@ -40,7 +40,7 @@ const Single = () => {
           {post.image && (
             <div className='h-52 sm:h-72 md:h-72 '>
               <img
-                className='max-w-5xl mx-auto w-full h-full object-cover'
+                className='max-w-5xl mx-auto w-full h-full object-cover object-left-top'
                 src={post.image.url}
                 alt='post-img'
               />
@@ -58,7 +58,7 @@ const Single = () => {
                     '/src/assets/user_noimage.jpg'
                   }
                   alt='avatar'
-                  className='w-10 h-10 object-cover rounded-full mr-4'
+                  className='w-10 h-10 object-cover rounded-full mr-4 object-left-top'
                 />
                 <p className='text-sm font-bold'>{author.username}</p>
               </div>

@@ -127,24 +127,24 @@ const Navbar = () => {
             <>
               <li>
                 <NavLink
-                  to='/write'
-                  onClick={e => {
-                    handleClickMenu(e)
-                  }}
-                  className='nav-link'
-                >
-                  Write
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
                   to='/dashboard'
                   onClick={e => {
                     handleClickMenu(e)
                   }}
-                  className='nav-link'
+                  className='nav-link md:border md:border-white md:rounded md:px-2 md:hover:border-gray-300'
                 >
-                  Dashboard
+                  <i class='fa-regular fa-user' /> Dashboard
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to='/write'
+                  onClick={e => {
+                    handleClickMenu(e)
+                  }}
+                  className='nav-link md:border md:border-white md:rounded md:px-2 md:hover:border-gray-300'
+                >
+                  <i class='fa-solid fa-pen-to-square' /> Write
                 </NavLink>
               </li>
               <li>
@@ -153,9 +153,9 @@ const Navbar = () => {
                     handleLogout(e)
                     handleClickMenu(e)
                   }}
-                  className='nav-link w-full'
+                  className='nav-link md:border md:border-white md:rounded md:px-2 md:hover:border-gray-300 w-full'
                 >
-                  Logout
+                  <i class='fa-solid fa-right-from-bracket' /> Logout
                 </button>
               </li>
             </>

@@ -51,7 +51,7 @@ const ChangeAvatar = () => {
       {loading && <Loader format='rounded' />}
       <div className='flex items-center justify-center'>
         <img
-          className='w-36 h-36 rounded-full object-cover'
+          className='w-36 h-36 rounded-full object-cover object-left-top'
           src={currentUser.avatar?.url || '/src/assets/user_noimage.jpg'}
           alt='user avatar'
         />
