@@ -106,19 +106,19 @@ const Navbar = () => {
               <li>
                 <NavLink
                   onClick={handleClickMenu}
-                  className='nav-link'
+                  className='nav-link md:border md:border-white md:rounded md:px-2 md:hover:border-gray-300'
                   to='/register'
                 >
-                  Register
+                  <i class='fa-solid fa-user-plus' /> Register
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   onClick={handleClickMenu}
-                  className='nav-link'
+                  className='nav-link md:border md:border-white md:rounded md:px-2 md:hover:border-gray-300'
                   to='/login'
                 >
-                  Login
+                  <i class='fa-solid fa-right-to-bracket' /> Login
                 </NavLink>
               </li>
             </>
