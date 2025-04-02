@@ -1,1 +1,1 @@
-export const serverUrl = 'https://dry-frog-5998.fly.dev'
+export const serverUrl = process.env.VITE_SERVER_URL
