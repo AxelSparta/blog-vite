@@ -1,10 +1,10 @@
+import DOMPurify from 'dompurify'
+import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import moment from 'moment'
-import { getPost } from '../services/posts'
-import DOMPurify from 'dompurify'
 import Loader from '../components/Loader'
 import { getUser } from '../services/getUser'
+import { getPost } from '../services/posts'
 
 const Single = () => {
   const [post, setPost] = useState(null)
@@ -32,15 +32,13 @@ const Single = () => {
   return (
     <section className='pt-[72px] min-h-screen'>
       {loading && <Loader />}
-      {!post && (
-        <p className='text-center font-bold p-4'>Post not found</p>
-      )}
+      {!post && <p className='text-center font-bold p-4'>Post not found</p>}
       {post && (
         <>
           {post.image && (
             <div className='h-52 sm:h-72 md:h-72 '>
               <img
-                className='max-w-5xl mx-auto w-full h-full object-cover object-left-top'
+                className='max-w-5xl mx-auto w-full h-full object-cover object-top-left'
                 src={post.image.url}
                 alt='post-img'
               />
@@ -53,19 +51,16 @@ const Single = () => {
               </p>
               <div className='flex items-center'>
                 <img
-                  src={
-                    author.avatar.url ||
-                    '/src/assets/user_noimage.jpg'
-                  }
+                  src={author.avatar.url || '/src/assets/user_noimage.jpg'}
                   alt='avatar'
-                  className='w-10 h-10 object-cover rounded-full mr-4 object-left-top'
+                  className='w-10 h-10 object-cover rounded-full mr-4 object-top-left'
                 />
                 <p className='text-sm font-bold'>{author.username}</p>
               </div>
             </div>
             <h1 className='text-4xl font-bold my-6'>{post.title}</h1>
             <div
-              className='post'
+              className='prose-sm md:prose-base mb-6'
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(post.content)
               }}

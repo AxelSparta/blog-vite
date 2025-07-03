@@ -1,11 +1,11 @@
-import moment from 'moment'
-import { Link } from 'react-router-dom'
 import _ from 'lodash'
+import moment from 'moment'
 import { useContext, useEffect, useState } from 'react'
+import { BiEdit, BiTrashAlt } from 'react-icons/bi'
+import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/authContext'
-import { BiTrashAlt, BiEdit } from 'react-icons/bi'
-import Dialog from './Dialog'
 import { deletePost } from '../services/posts'
+import Dialog from './Dialog'
 import Loader from './Loader'
 
 const PostCard = ({ post, handleGetPosts }) => {
@@ -44,7 +44,7 @@ const PostCard = ({ post, handleGetPosts }) => {
       {loading && <Loader />}
       {dialog && <Dialog handleDelete={handleDelete} />}
       <img
-        className='md:w-72 w-72 h-44 object-cover object-left-top'
+        className='md:w-72 w-72 h-44 object-cover object-top-left'
         src={
           image?.url ||
           '/src/assets/blog_noimage.jpg'

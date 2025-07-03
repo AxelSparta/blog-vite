@@ -41,7 +41,7 @@ const ChangeAvatar = () => {
     setShowAlert(false)
   }
   return (
-    <div className='flex flex-col items-center relative p-5 rounded'>
+    <div className='flex flex-col items-center relative p-5 rounded-sm'>
       {showAlert && (
         <Alert
           message='Avatar changed successfully!'
@@ -51,7 +51,7 @@ const ChangeAvatar = () => {
       {loading && <Loader format='rounded' />}
       <div className='flex items-center justify-center'>
         <img
-          className='w-36 h-36 rounded-full object-cover object-left-top'
+          className='w-36 h-36 rounded-full object-cover object-top-left'
           src={currentUser.avatar?.url || '/src/assets/user_noimage.jpg'}
           alt='user avatar'
         />

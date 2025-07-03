@@ -14,7 +14,7 @@ export default function Dialog ({ message, handleDelete }) {
       className='fixed top-0 left-0 h-screen w-full bg-gray-700 flex items-center justify-center z-20 bg-opacity-80'
       onClick={handleNo}
     >
-      <div className='bg-white w-72 text-center rounded p-4'>
+      <div className='bg-white w-72 text-center rounded-sm p-4'>
         <h3 className='font-bold'>
           {message} Are you sure you want to delete it?
         </h3>

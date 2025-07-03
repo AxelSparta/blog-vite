@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import logo from '../assets/logo-blog.png'
 import '../assets/hamburgers.css'
+import logo from '../assets/logo-blog.png'
 import { AuthContext } from '../context/authContext'
 import Loader from './Loader'
 
@@ -106,7 +106,7 @@ const Navbar = () => {
               <li>
                 <NavLink
                   onClick={handleClickMenu}
-                  className='nav-link md:border md:border-white md:rounded md:px-2 md:hover:border-gray-300'
+                  className='nav-link md:border md:border-white md:rounded-sm md:px-2 md:hover:border-gray-300'
                   to='/register'
                 >
                   <i class='fa-solid fa-user-plus' /> Register
@@ -115,7 +115,7 @@ const Navbar = () => {
               <li>
                 <NavLink
                   onClick={handleClickMenu}
-                  className='nav-link md:border md:border-white md:rounded md:px-2 md:hover:border-gray-300'
+                  className='nav-link md:border md:border-white md:rounded-sm md:px-2 md:hover:border-gray-300'
                   to='/login'
                 >
                   <i class='fa-solid fa-right-to-bracket' /> Login
@@ -131,7 +131,7 @@ const Navbar = () => {
                   onClick={e => {
                     handleClickMenu(e)
                   }}
-                  className='nav-link md:border md:border-white md:rounded md:px-2 md:hover:border-gray-300'
+                  className='nav-link md:border md:border-white md:rounded-sm md:px-2 md:hover:border-gray-300'
                 >
                   <i class='fa-regular fa-user' /> Dashboard
                 </NavLink>
@@ -142,7 +142,7 @@ const Navbar = () => {
                   onClick={e => {
                     handleClickMenu(e)
                   }}
-                  className='nav-link md:border md:border-white md:rounded md:px-2 md:hover:border-gray-300'
+                  className='nav-link md:border md:border-white md:rounded-sm md:px-2 md:hover:border-gray-300'
                 >
                   <i class='fa-solid fa-pen-to-square' /> Write
                 </NavLink>
@@ -153,7 +153,7 @@ const Navbar = () => {
                     handleLogout(e)
                     handleClickMenu(e)
                   }}
-                  className='nav-link md:border md:border-white md:rounded md:px-2 md:hover:border-gray-300 w-full'
+                  className='cursor-pointer nav-link md:border md:border-white md:rounded-sm md:px-2 md:hover:border-gray-300 w-full'
                 >
                   <i class='fa-solid fa-right-from-bracket' /> Logout
                 </button>
@@ -163,7 +163,7 @@ const Navbar = () => {
         </ul>
 
         <button
-          className='hamburger hamburger--emphatic fixed bottom-0 right-0 z-30 md:hidden'
+          className='hamburger hamburger--emphatic fixed md:hidden bottom-0 right-0 z-30'
           type='button'
           onClick={handleClickMenu}
           ref={buttonMenu}

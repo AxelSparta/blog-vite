@@ -65,7 +65,7 @@ const ChangeUsernameForm = () => {
           deleteAlert={deleteAlert}
         />
       )}
-      <form className='relative p-5 rounded' onSubmit={handleUsernameForm}>
+      <form className='relative p-5 rounded-sm' onSubmit={handleUsernameForm}>
         {loading && <Loader format='rounded' />}
         <h3 className='text-center font-bold text-2xl'>Change username</h3>
         <input

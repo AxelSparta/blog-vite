@@ -123,7 +123,7 @@ const Write = () => {
         {loading && <Loader format='rounded-lg z-10' />}
 
         <input
-          className='w-full py-2 px-4 border border-gray-400 rounded font-bold text-base text-gray-700 focus:outline-none focus:border-gray-700'
+          className='w-full py-2 px-4 border border-gray-400 rounded-sm font-bold text-base text-gray-700 focus:outline-hidden focus:border-gray-700'
           placeholder='title'
           type='text'
           name='title'
@@ -254,7 +254,7 @@ const Write = () => {
 
         <button
           onClick={handleSubmit}
-          className='mt-4 py-2 px-8 border border-blue-700 text-blue-700 rounded hover:bg-blue-700 hover:text-white cursor-default'
+          className='mt-4 py-2 px-8 border border-blue-700 text-blue-700 rounded-sm hover:bg-blue-700 hover:text-white cursor-default'
         >
           Post
         </button>
